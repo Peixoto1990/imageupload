@@ -1,0 +1,41 @@
+.Imagem {
+    flex-basis: 230px;
+    width: 230px;
+    height: 230px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,.5);
+    position: relative;
+    transition: .3s transform ease-in-out;
+}
+
+.Imagem:is(:hover, :active, :focus) {
+    transform: scale(1.1);
+}
+
+.Imagem:is(:hover, :active, :focus) .botaoExcluir {
+    display: block;
+}
+
+.Imagem img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.botaoExcluir {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    padding: .2rem .4rem;
+    font-size: .8rem;
+    background-color: rgba(0,0,0,.5);
+    color: #FFFFFF;
+    border-radius: 50%;
+    transition: color .3s ease-in-out;
+    display: none;
+}
+
+.botaoExcluir:is(:hover, :active, :focus) {
+    background-color: #FF0000;
+}

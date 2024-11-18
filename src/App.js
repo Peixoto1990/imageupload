@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
+import Imagem from './componentes/Imagem';
+import Input from './componentes/Input';
+import { useState, useEffect } from 'react';
+import { v4 as novoId } from 'uuid';
 
-function App() {
+export default function App() {
+  const [imagem, setImagem] = useState(null);
+  const [listaImagens, setListaImagens] = useState([]);
+
+  function recebeImagem(ev) {
+    if (ev.target.files[0].type.match(/image\/.+/gi) !== null) {
+      setImagem(ev.target.files[0]);
+    } else {
+      alert('Somente arquivos de imagem são aceitos. Tente novamente.')
+    }
+  }
+
+  useEffect(() => {
+    if (imagem !== null) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(imagem);
+
+      fileReader.onload = (ev) => {
+        const novaImagem = {
+          id: novoId(),
+          imagem: ev.target.result
+        }
+        setListaImagens([...listaImagens, novaImagem]);
+      }
+    }
+  }, [imagem]);
+
+  function excluiImagem(id) {
+    setListaImagens(listaImagens.filter((imagem) => imagem.id !== id));
+
+    return null;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.App}>
+      <main>
+        <section className={styles.ConteinerImagens}>
+          <Input
+            tipo='file'
+            obrigatorio={true}
+            id='imagem' 
+            label='+'
+            recebeImagem={recebeImagem}
+          />
+          {listaImagens.length > 0 ? listaImagens.map((imagem) => <Imagem excluiImagem={excluiImagem} id={imagem.id} key={imagem.id} src={imagem.imagem}/>) : null}
+        </section>
+      </main>
     </div>
   );
 }
-
-export default App;

@@ -1,0 +1,11 @@
+.App {
+  background-color: rgb(238, 238, 238);
+}
+
+.ConteinerImagens {
+  display: flex;
+  padding: 2rem;
+  justify-content: space-around;
+  gap: 1rem 0;
+  flex-wrap: wrap;
+}
