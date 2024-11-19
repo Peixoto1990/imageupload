@@ -40,6 +40,7 @@ export default function App() {
   return (
     <div className={styles.App}>
       <main>
+        <h2>Clique na caixa abaixo para adicionar imagens</h2>
         <section className={styles.ConteinerImagens}>
           <Input
             tipo='file'

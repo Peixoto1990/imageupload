@@ -9,3 +9,8 @@
   gap: 1rem 0;
   flex-wrap: wrap;
 }
+
+.App main h2 {
+  text-align: center;
+  padding: 2rem 0;
+}
